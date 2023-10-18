@@ -1,10 +1,18 @@
 'use client'
 
+import { useRouter } from "next/navigation";
 import ProductButton from "./ProductButton"
 import PruductHeader from "./ProductHeader";
+import { useEffect } from "react";
+import Notification from "../Notification";
 
 
 export default function CommonLisnting({data}){
+    const router = useRouter();
+
+    useEffect(()=>{
+        router.refresh();
+    }, [])
 
     return (
         <section className="bg-white py-12 sm:py-16">
@@ -23,7 +31,7 @@ export default function CommonLisnting({data}){
                 </div>
 
             </div>
-            
+            <Notification />
         </section>
     )
     

@@ -6,7 +6,7 @@ import TileComponent from "@/components/FormElements/TileComponent"
 import ComponentLevelLoader from "@/components/Loader/componentLevel"
 import Notification from "@/components/Notification"
 import { GlobalContext } from "@/context"
-import { addNewProduct } from "@/services/product"
+import { addNewProduct, updateProduct } from "@/services/product"
 import { AvailableSizes, adminAddProductformControls, firebaseConfig, firebaseStorageURL } from "@/utils"
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"; 
@@ -110,7 +110,7 @@ export default function AdminAddNewProduct(){
 
         async function handleAddProduct(){
             setComponentLevelLoader({loading : true, id : ''});
-            const res = await addNewProduct(formData);
+            const res = currentUpdatedProduct !== null ? await updateProduct(formData) : await addNewProduct(formData);
             console.log(res);
 
             if(res.success){
@@ -120,6 +120,7 @@ export default function AdminAddNewProduct(){
                 });
 
                 setFormData(initialFormData);
+                setCurrentUpdatedProduct(null);
                 setTimeout(() => {
                     router.push('/admin-view/all-products');
                 }, 1000);
@@ -188,10 +189,13 @@ export default function AdminAddNewProduct(){
                         {
                             componentLevelLoader && componentLevelLoader.loading ? (
                             <ComponentLevelLoader 
-                                text={"Agregando Producto"}
+                                text={currentUpdatedProduct !== null ? 'Actualizando Producto' : "Agregando Producto"}
                                 color={"#ffffff"}
                                 loading={componentLevelLoader && componentLevelLoader.loading}
-                            /> ) : 'Agregar Producto'
+                            /> ) : ( 
+                            currentUpdatedProduct !== null ? 
+                                'Actualizar Producto' : 'Agregar Producto'
+                            )
                         }
                     </button>
 

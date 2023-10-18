@@ -51,8 +51,6 @@ export default function Navbar(){
     const router = useRouter();
     const pathName = usePathname();
 
-    console.log(pathName);
-
     useEffect( ()=>{
         if(pathName !== '/admin-view/add-product' && currentUpdatedProduct !== null){
             setCurrentUpdatedProduct(null);

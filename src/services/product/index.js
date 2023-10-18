@@ -25,7 +25,8 @@ export const addNewProduct = async (formData)=>{
 export const getAllAdminProducts = async ()=>{
     try {
         const res = await fetch('http://localhost:3000/api/admin/all-products', {
-            cache : 'no-cache'
+            method : 'GET',
+            cache : 'no-store'
         });
 
         const data = await res.json();
@@ -60,7 +61,8 @@ export const updateProduct = async (formData) => {
 
 export const deletedProduct = async (id) => {
     try {
-        const res = await fetch(`/api/admin/delete-product/id=${id}`, {
+        const url = `/api/admin/delete-product/${id}`
+        const res = await fetch(`/api/admin/delete-product/${id}`, {
             method : 'DELETE',
             headers : {
                 Authorization : `Bearer ${Cookies.get('token')}`

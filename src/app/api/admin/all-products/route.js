@@ -9,10 +9,8 @@ export const dynamic = 'force-dynamic';
 export async function GET(req){
 
     try {
-        console.log('numero 1');
         await conectToDB();
         const user = 'admin';
-        console.log('numero 2');
 
         if(user === 'admin'){
             const extractAllProducts = await Product.find({});

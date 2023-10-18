@@ -1,5 +1,6 @@
 import conectToDB from "@/database";
 import Product from "@/models/product";
+import { useRouter } from "next/navigation";
 import { NextResponse } from "next/server";
 
 
@@ -7,15 +8,20 @@ import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 
 
-export default async function DELETE(req){
-    try {
+export async function DELETE(req){ 
+    //console.log(req)
+    //const router = useRouter();
+    //console.log(router.query);
+    try {       
         await conectToDB();
-        const { searchParams } = new URL(req.url);
-        const id = searchParams.get('id');
-
-        if(!id) return NextResponse.json({ success : false, message : 'ID del producto no encontrado' });
+        const { searchParams, pathname } = new URL(req.url);
+        //const id = searchParams.get('id');
+        const id2 = pathname.slice(26);
         
-        const deletedProduct = await Product.findByIdAndDelete(id);
+
+        if(!id2) return NextResponse.json({ success : false, message : 'ID del producto no encontrado' });
+        
+        const deletedProduct = await Product.findByIdAndDelete(id2);
         if(deletedProduct){
             return NextResponse.json({ success : true, message : 'Producto eliminado correctamente' });
         }else{

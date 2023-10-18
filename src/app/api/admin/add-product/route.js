@@ -54,6 +54,7 @@ export async function POST(req){
                     success : true,
                     message : 'Producto agregado exitosamente'
                 })
+                
             }else{
                 return NextResponse.json({
                     success : false,
