@@ -6,6 +6,7 @@ import { Fragment, useContext, useEffect } from "react";
 import CommonModal from "../CommonModal";
 import Cookies from "js-cookie";
 import { usePathname, useRouter } from "next/navigation";
+import CartModal from "../CartModal";
 
 
         //const isAdminView = false;
@@ -46,7 +47,14 @@ import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar(){
     const { showNavModal, setShowNavModal } = useContext(GlobalContext);
-    const { user, isAuthUser, setIsAuthUser, setUser, currentUpdatedProduct, setCurrentUpdatedProduct } = useContext(GlobalContext);
+    const { user, 
+        isAuthUser, 
+        setIsAuthUser, 
+        setUser, 
+        currentUpdatedProduct, 
+        setCurrentUpdatedProduct,
+        showCartModal,
+        setShowCartModal } = useContext(GlobalContext);
 
     const router = useRouter();
     const pathName = usePathname();
@@ -60,6 +68,7 @@ export default function Navbar(){
     }, [pathName] );
 
     function handleLogout(){
+        setShowCartModal(false);
         setIsAuthUser(false);
         setUser(null);
         Cookies.remove('token');
@@ -82,8 +91,18 @@ export default function Navbar(){
                     <div className="flex md:order-2 gap-2">
                         {!isAdminView && isAuthUser?(
                             <Fragment>
-                                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-sm font-medium upprcase tracking-wide text-white">Carrito</button>
-                                <button className="mt-1.5 inline-block bg-black px-5 py-3 text-sm font-medium upprcase tracking-wide text-white">Cuenta</button>
+                                <button 
+                                    className="mt-1.5 inline-block bg-black px-5 py-3 text-sm font-medium upprcase tracking-wide text-white"
+                                    onClick={()=> setShowCartModal(true)}
+                                >
+                                    Carrito
+                                </button>
+                                <button 
+                                    className="mt-1.5 inline-block bg-black px-5 py-3 text-sm font-medium upprcase tracking-wide text-white"
+                                    onClick={()=> router.push('/account')}
+                                >
+                                    Cuenta
+                                </button>
                             </Fragment>
                         ): null}
 
@@ -140,6 +159,10 @@ export default function Navbar(){
                 show={showNavModal} 
                 setShow={setShowNavModal}
             />
+
+            {
+                showCartModal && <CartModal />
+            }
         </>
     ) 
 }

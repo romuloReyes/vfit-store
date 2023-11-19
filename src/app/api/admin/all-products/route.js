@@ -10,31 +10,24 @@ export async function GET(req){
 
     try {
         await conectToDB();
-        const user = 'admin';
+        //const user = 'admin';
 
-        if(user === 'admin'){
-            const extractAllProducts = await Product.find({});
+        const extractAllProducts = await Product.find({});
 
-            if(extractAllProducts){
-                return NextResponse.json({
-                    success : true,
-                    data : extractAllProducts
-                })
-            }else {
-                return NextResponse.json({
-                success : false,
-                status : 204,
-                message : 'No products found'
-                })
-
-            }
-            
+        if(extractAllProducts){
+            return NextResponse.json({
+                success : true,
+                data : extractAllProducts
+            })
         }else {
             return NextResponse.json({
-                success : false,
-                message : 'You are not autorized'
+            success : false,
+            status : 204,
+            message : 'No products found'
             })
+
         }
+            
     } catch (error) {
         return NextResponse.json({
             success : false,

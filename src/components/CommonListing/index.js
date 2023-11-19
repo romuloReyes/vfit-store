@@ -20,7 +20,10 @@ export default function CommonLisnting({data}){
                 <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-4 sm:gap-4 lg:mt-16">
                     { data && data.length ?
                         data.map( item => (
-                            <article className="relative flex flex-col overflow-hidden border cursor-pointer" key={item._id}>
+                            <article 
+                                className="relative flex flex-col overflow-hidden border cursor-pointer" 
+                                key={item._id}
+                            >
                                 <PruductHeader item={item}/>
                                 <ProductButton item={item}/>
                                 

@@ -1,4 +1,5 @@
 import conectToDB from "@/database";
+import AuthUser from "@/middleware/AuthUser";
 import Product from "@/models/product";
 import Joi from "joi";
 import { NextResponse } from "next/server";
@@ -24,9 +25,12 @@ export async function POST(req){
 
         /*SECURITY BREACH: hard code use to validate the user as authenticated and with an admin rol during development.
          Is intented to be replaced with a middlewere */
-         const user = 'admin'; /* ---- */ 
+         //const user = 'admin'; /* ---- */ 
 
-         if(user === 'admin'){
+         const isAuthUser = await AuthUser(req);
+         console.log(isAuthUser, '================> desde ruta API addPrduct');
+
+         if(isAuthUser?.role === 'admin'){
             const extractData = await req.json();
             const { name, description, price, category, sizes, deliveryInfo, onSale, priceDrop,imageUrl } = extractData;
 
