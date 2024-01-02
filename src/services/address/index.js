@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 export const addNewAddress = async ( FormData )=>{
 
     try {
+
         const res = await fetch('api/address/add-new-address', {
             method : 'POST',
             headers : {
