@@ -28,7 +28,6 @@ export async function POST(req){
          //const user = 'admin'; /* ---- */ 
 
          const isAuthUser = await AuthUser(req);
-         console.log(isAuthUser, '================> desde ruta API addPrduct');
 
          if(isAuthUser?.role === 'admin'){
             const extractData = await req.json();

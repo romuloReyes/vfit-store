@@ -257,7 +257,7 @@ export default function CheckOut(){
                                 <p className="text-sm font-medium text-gray-900">Subtotal</p>
                                 <p className="text-lg font-bold text-gray-900">
                                     ${ cartItems && cartItems.length ? 
-                                    cartItems.reduce( (total, item) => item.productID.price + total, 0 ) 
+                                    cartItems.reduce( (total, item) => parseFloat(item.productID.price + total).toFixed(2), 0 ) 
                                     : 
                                     '0' }
                                 </p>
@@ -273,7 +273,7 @@ export default function CheckOut(){
                                 <p className="text-sm font-medium text-gray-900">Total</p>
                                 <p className="text-lg font-bold text-gray-900">
                                     ${ cartItems && cartItems.length ? 
-                                    cartItems.reduce( (total, item) => item.productID.price + total, 0 ) 
+                                    cartItems.reduce( (total, item) => parseFloat(item.productID.price + total).toFixed(2), 0 ) 
                                     : 
                                     '0' }
                                 </p>

@@ -1,49 +1,42 @@
+import { NextResponse } from "next/server";
 import conectToDB from "@/database";
 import AuthUser from "@/middleware/AuthUser";
 import Order from "@/models/order";
-import { NextResponse } from "next/server";
-
 
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(req, {params}){
+
+export async function GET(req){
+
     try {
 
         await conectToDB();
         const isAuthUser = await AuthUser(req);
+        if(isAuthUser?.role === 'admin'){
 
-        if(isAuthUser){
-            const { searchParams } = new URL(req.url);
-            const id = searchParams.get('id');
-            const id2 = params.id;
-            console.log({user : id2});
-
-            const extractAllOrders = await Order.find({user : id2}).populate('orderItems.product');
-        
-            if(extractAllOrders){
+            const getAllOrders = await Order.find({}).populate('orderItems.product').populate('user');
+            if(getAllOrders){
                 return NextResponse.json({
                     success : true,
-                    data : extractAllOrders
-                });
+                    data : getAllOrders
+                })
             }else{
                 return NextResponse.json({
                     success : false,
-                    message : 'Error al cargar la orden.'
+                    message : 'Error. No se encontraron las ordenes'
                 })
             }
-
-
 
         }else{
             return NextResponse.json({
                 success : false,
                 message : 'No estas autenticado'
-            });
+            })
         }
-
         
     } catch (error) {
+        console.log(error);
         return NextResponse.json({
             success : false,
             message : 'Algo salio mal. Por favor intente de nuevo'

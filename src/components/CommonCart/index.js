@@ -1,8 +1,13 @@
 'use client'
 
+import { useRouter } from "next/navigation"
+
 
 
 export default function CommonCart({cartItems=[], handleDeleteCartItem, componentLevelLoader}){
+    const router = useRouter();
+
+    console.log(cartItems);
 
     return (
         <section className="h-screen bg-gray-100">
@@ -84,7 +89,7 @@ export default function CommonCart({cartItems=[], handleDeleteCartItem, componen
                                     <p className="text-lg text-black font-semibold" >
                                         ${
                                             cartItems && cartItems.length ? 
-                                                cartItems.reduce((total, item)=> item.productID.price + total, 0) 
+                                                cartItems.reduce((total, item)=> parseFloat(item.productID.price) + total, 0) 
 
                                             : "0"
                                         }
@@ -106,7 +111,7 @@ export default function CommonCart({cartItems=[], handleDeleteCartItem, componen
                                     <p className="text-lg text-black font-semibold" >
                                         ${
                                             cartItems && cartItems.length ? 
-                                                cartItems.reduce((total, item)=> item.productID.price + total, 0) 
+                                                cartItems.reduce((total, item)=> Number(item.productID.price) + total, 0) 
 
                                             : "0"
                                         }
@@ -119,6 +124,7 @@ export default function CommonCart({cartItems=[], handleDeleteCartItem, componen
                                     <button 
                                         className="group inline-flex w-full items-center justify-center bg-black text-white px-6 py-4 text-lg font-medium uppercase tracking-wide disabled:opacity-50"
                                         disabled={cartItems && cartItems.length === 0}
+                                        onClick={()=> router.push('/checkout')}
                                     >
                                         Continuar y pagar
                                     </button>

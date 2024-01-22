@@ -7,8 +7,6 @@ import { NextResponse } from "next/server";
 export const dynamic = 'force-dynamic';
 
 export async function GET(req, {params}){
-    //console.log('desde GET productByCategory');
-    console.log('==========> DESDE GET ROUTE <=======');
     console.log(params);
     try {
         await conectToDB();
