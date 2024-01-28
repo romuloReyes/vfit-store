@@ -7,8 +7,6 @@ import { useRouter } from "next/navigation"
 export default function CommonCart({cartItems=[], handleDeleteCartItem, componentLevelLoader}){
     const router = useRouter();
 
-    console.log(cartItems);
-
     return (
         <section className="h-screen bg-gray-100">
             <div className="mx-auto px-4 sm:px-6 lg:px-8">

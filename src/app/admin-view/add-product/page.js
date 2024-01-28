@@ -65,7 +65,6 @@ export default function AdminAddNewProduct(){
         const [ formData, setFormData ] = useState(initialFormData);
         const { componentLevelLoader, setComponentLevelLoader, currentUpdatedProduct, setCurrentUpdatedProduct } = useContext(GlobalContext);
         
-        console.log(currentUpdatedProduct);
         const router = useRouter();
 
         useEffect(()=>{
@@ -106,12 +105,9 @@ export default function AdminAddNewProduct(){
             })
         }
 
-        console.log(formData);
-
         async function handleAddProduct(){
             setComponentLevelLoader({loading : true, id : ''});
             const res = currentUpdatedProduct !== null ? await updateProduct(formData) : await addNewProduct(formData);
-            console.log(res);
 
             if(res.success){
                 setComponentLevelLoader({loading : false, id : ''});

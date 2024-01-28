@@ -59,7 +59,6 @@ export default function Register(){
             setFormData(initialFormData);
           }
 
-        console.log(data);
     }
 
     useEffect(()=>{

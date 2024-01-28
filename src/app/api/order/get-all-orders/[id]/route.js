@@ -17,7 +17,6 @@ export async function GET(req, {params}){
             const { searchParams } = new URL(req.url);
             const id = searchParams.get('id');
             const id2 = params.id;
-            console.log({user : id2});
 
             const extractAllOrders = await Order.find({user : id2}).populate('orderItems.product');
         

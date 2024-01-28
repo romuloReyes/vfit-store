@@ -1,7 +1,6 @@
 
 import Cookies from "js-cookie";
 
-
 export const addNewProduct = async (formData)=>{
     try {
         const result = await fetch('/api/admin/add-product', {
@@ -23,8 +22,10 @@ export const addNewProduct = async (formData)=>{
 }
 
 export const getAllAdminProducts = async ()=>{
+    console.log(process.env.NEXT_PUBLIC_URL);
+    const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
     try {
-        const res = await fetch('http://localhost:3000/api/admin/all-products', {
+        const res = await fetch(`${url}/api/admin/all-products`, {
             method : 'GET',
             cache : 'no-store'
         });
@@ -79,9 +80,9 @@ export const deletedProduct = async (id) => {
 }
 
 export const productByCategory = async (id) => {
-
+    const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
     try {
-        const res = await fetch(`http://localhost:3000/api/admin/product-by-category/${id}`, {
+        const res = await fetch(`${url}/api/admin/product-by-category/${id}`, {
             method : 'GET',
             cache : 'no-store'
         });
@@ -93,10 +94,10 @@ export const productByCategory = async (id) => {
 }
 
 export const productByID = async (id)=>{
-
+    const url = process.env.NEXT_PUBLIC_URL || 'http://localhost:3000';
     try {
         
-        const res = await fetch(`http://localhost:3000/api/admin/product-by-id/${id}`, {
+        const res = await fetch(`${url}/api/admin/product-by-id/${id}`, {
             method : 'GET',
             cache : 'no-store'
         })

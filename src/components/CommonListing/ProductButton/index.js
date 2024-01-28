@@ -59,8 +59,6 @@ export default function ProductButton({item}){
 
                 }
 
-                console.log(res);
-
             }
     
     return isAdminView ? (

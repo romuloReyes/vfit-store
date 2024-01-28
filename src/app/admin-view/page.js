@@ -23,7 +23,6 @@ export default function AdminView(){
     async function extractAllOrdersForAllUsers(){
         setPageLevelLoader(true);
         const res = await getAllOrdersForAllUsers();
-        console.log(res, 'esta es la respues RES');
 
         if(res.success){
             setPageLevelLoader(false);
@@ -50,7 +49,6 @@ export default function AdminView(){
         if(res.success){
             setComponentLevelLoader({loading : false, id : ''})
             const res = await getAllOrdersForAllUsers();
-            console.log(res, 'esta es la respues RES');
 
             if(res.success){
                 setAllOrdersForAllUsers( res.data && res.data.length ? res.data.filter( (item)=> item.user._id !== user.id ) : [] )
@@ -73,8 +71,6 @@ export default function AdminView(){
     </div> )
 
     }
-
-    console.log(allOrdersForAllUsers, 'Este es el estado allOrders');
 
     return <section>
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
