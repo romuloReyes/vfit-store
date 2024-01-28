@@ -22,6 +22,7 @@ import CartModal from "../CartModal";
                         {isAdminView ? 
                             adminNavOptions.map( item =>(
                                 <li 
+                                    key={item.id}
                                     className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0" 
                                     id={item.id}
                                     onClick={()=> router.push(item.path)}
@@ -31,6 +32,7 @@ import CartModal from "../CartModal";
                             )): 
                             navOptions.map( item =>(
                                 <li 
+                                    key={item.id}
                                     className="cursor-pointer block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0" 
                                     id={item.id}
                                     onClick={()=> router.push(item.path)}
