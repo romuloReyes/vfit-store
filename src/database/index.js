@@ -7,7 +7,7 @@ const configOptions = {
 }
 
 const conectToDB = async ()=>{
-    const conectUrl = 'mongodb+srv://reyesromulo:olumor1997@vfitcluster.uo1pnvd.mongodb.net/';
+    const conectUrl = process.env.MONGODB_URL;
 
     mongoose.connect(conectUrl, configOptions)
         .then(()=> console.log('vfit - store database connected successfully'))
