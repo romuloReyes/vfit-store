@@ -7,7 +7,7 @@ export const addNewAddress = async ( FormData )=>{
 
     try {
 
-        const res = await fetch('api/address/add-new-address', {
+        const res = await fetch('/api/address/add-new-address', {
             method : 'POST',
             headers : {
                 'Content-Type' : 'Application/json',
@@ -48,7 +48,7 @@ export const deleteAddress = async ( id )=>{
 export const fetchAllAddresses = async ( id )=>{
 
     try {
-        const res = await fetch(`api/address/get-all-address/${id}`, {
+        const res = await fetch(`/api/address/get-all-address/${id}`, {
             method : 'GET',
             headers : {
                 Authorization : `Bearer ${Cookies.get('token')}`
@@ -67,7 +67,7 @@ export const fetchAllAddresses = async ( id )=>{
 export const updateAddress = async ( FormData )=>{
 
     try {
-        const res = await fetch('api/address/update-address', {
+        const res = await fetch('/api/address/update-address', {
             method : 'PUT',
             headers :  {
                 'Content-Type' : 'Application/json',
