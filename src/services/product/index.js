@@ -29,13 +29,14 @@ export const getAllAdminProducts = async ()=>{
             method : 'GET',
             cache : 'no-store'
         });
-
+        console.log('RESPUESTA:', res);
         const data = await res.json();
-
+        console.log('RESPUESTA JSON: ', data);
         return data; 
         
     } catch (error) {
-        console.log(error);
+        console.error("Error fetching all products:", error);
+        return { error: "Failed to fetch all products." };
     }
 }
 
