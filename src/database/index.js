@@ -7,7 +7,7 @@ const configOptions = {
 }
 
 const conectToDB = async ()=>{
-    const conectUrl = process.env.MONGODB_URL;
+    const conectUrl = process.env.NEXT_PUBLIC_MONGODB_URL;
 
     mongoose.connect(conectUrl, configOptions)
         .then(()=> console.log('vfit - store database connected successfully'))
